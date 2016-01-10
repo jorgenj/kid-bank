@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @posting.account_id %>
+</p>
+
+<p>
+  <strong>Journal:</strong>
+  <%= @posting.journal_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @posting.amount %>
+</p>
+
+<%= link_to 'Edit', edit_posting_path(@posting) %> |
+<%= link_to 'Back', postings_path %>
