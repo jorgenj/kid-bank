@@ -19,15 +19,21 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TransactionsController, type: :controller do
+  let!(:cash_account) {
+    create(:account, name: 'CASH')
+  }
+
+  let(:user_account) {
+    create(:account)
+  }
 
   # This should return the minimal set of attributes required to create a valid
   # Transaction. As you add validations to Transaction, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     { transaction_type: 'DEPOSIT', 
-      account_id: create(:account).id,
+      account_id: user_account.id,
       amount: 10_000,
-      journal_id: create(:journal).id,
       note: 'My first deposit',
     }
   }
@@ -89,6 +95,20 @@ RSpec.describe TransactionsController, type: :controller do
         puts assigns(:transaction).errors.inspect
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
+
+        txn = assigns(:transaction)
+        expect(txn.journal).to be_a(Journal)
+        expect(txn.journal).to be_persisted
+
+        expect(txn.journal.postings).to_not be_empty
+        expect(txn.journal.postings.count).to eq(2)
+        expect(txn.journal.postings.sum(:amount)).to eq(0)
+
+        expect(txn.journal.postings[0].account).to eq(cash_account)
+        expect(txn.journal.postings[0].amount).to eq(-10_000)
+
+        expect(txn.journal.postings[1].account).to eq(user_account)
+        expect(txn.journal.postings[1].amount).to eq(10_000)
       end
 
       it "redirects to the created transaction" do

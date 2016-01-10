@@ -55,4 +55,6 @@ end
 gem 'rails_12factor', group: :production
 gem 'puma'
 
+gem 'rails-footnotes', '~> 4.0'
+
 ruby "2.2.3"
