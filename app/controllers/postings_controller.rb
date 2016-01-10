@@ -18,8 +18,8 @@ class PostingsController < ApplicationController
   end
 
   # GET /postings/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /postings
   # POST /postings.json
@@ -39,27 +39,27 @@ class PostingsController < ApplicationController
 
   # PATCH/PUT /postings/1
   # PATCH/PUT /postings/1.json
-  def update
-    respond_to do |format|
-      if @posting.update(posting_params)
-        format.html { redirect_to @posting, notice: 'Posting was successfully updated.' }
-        format.json { render :show, status: :ok, location: @posting }
-      else
-        format.html { render :edit }
-        format.json { render json: @posting.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  respond_to do |format|
+  #    if @posting.update(posting_params)
+  #      format.html { redirect_to @posting, notice: 'Posting was successfully updated.' }
+  #      format.json { render :show, status: :ok, location: @posting }
+  #    else
+  #      format.html { render :edit }
+  #      format.json { render json: @posting.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /postings/1
   # DELETE /postings/1.json
-  def destroy
-    @posting.destroy
-    respond_to do |format|
-      format.html { redirect_to postings_url, notice: 'Posting was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  #def destroy
+  #  @posting.destroy
+  #  respond_to do |format|
+  #    format.html { redirect_to postings_url, notice: 'Posting was successfully destroyed.' }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

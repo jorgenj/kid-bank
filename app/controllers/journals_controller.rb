@@ -18,8 +18,8 @@ class JournalsController < ApplicationController
   end
 
   # GET /journals/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /journals
   # POST /journals.json
@@ -39,27 +39,27 @@ class JournalsController < ApplicationController
 
   # PATCH/PUT /journals/1
   # PATCH/PUT /journals/1.json
-  def update
-    respond_to do |format|
-      if @journal.update(journal_params)
-        format.html { redirect_to @journal, notice: 'Journal was successfully updated.' }
-        format.json { render :show, status: :ok, location: @journal }
-      else
-        format.html { render :edit }
-        format.json { render json: @journal.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  respond_to do |format|
+  #    if @journal.update(journal_params)
+  #      format.html { redirect_to @journal, notice: 'Journal was successfully updated.' }
+  #      format.json { render :show, status: :ok, location: @journal }
+  #    else
+  #      format.html { render :edit }
+  #      format.json { render json: @journal.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /journals/1
   # DELETE /journals/1.json
-  def destroy
-    @journal.destroy
-    respond_to do |format|
-      format.html { redirect_to journals_url, notice: 'Journal was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  #def destroy
+  #  @journal.destroy
+  #  respond_to do |format|
+  #    format.html { redirect_to journals_url, notice: 'Journal was successfully destroyed.' }
+  #    format.json { head :no_content }
+  #  end
+  #end
 
   private
     # Use callbacks to share common setup or constraints between actions.

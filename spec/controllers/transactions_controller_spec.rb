@@ -145,28 +145,36 @@ RSpec.describe TransactionsController, type: :controller do
 
       it "assigns the requested transaction as @transaction" do
         transaction = Transaction.create! valid_attributes
-        put :update, {:id => transaction.to_param, :transaction => valid_attributes}, valid_session
-        expect(assigns(:transaction)).to eq(transaction)
+        expect {
+          put :update, {:id => transaction.to_param, :transaction => valid_attributes}, valid_session
+          #expect(assigns(:transaction)).to eq(transaction)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "redirects to the transaction" do
         transaction = Transaction.create! valid_attributes
-        put :update, {:id => transaction.to_param, :transaction => valid_attributes}, valid_session
-        expect(response).to redirect_to(transaction)
+        expect {
+          put :update, {:id => transaction.to_param, :transaction => valid_attributes}, valid_session
+          #expect(response).to redirect_to(transaction)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
 
     context "with invalid params" do
       it "assigns the transaction as @transaction" do
         transaction = Transaction.create! valid_attributes
-        put :update, {:id => transaction.to_param, :transaction => invalid_attributes}, valid_session
-        expect(assigns(:transaction)).to eq(transaction)
+        expect {
+          put :update, {:id => transaction.to_param, :transaction => invalid_attributes}, valid_session
+          #expect(assigns(:transaction)).to eq(transaction)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "re-renders the 'edit' template" do
         transaction = Transaction.create! valid_attributes
-        put :update, {:id => transaction.to_param, :transaction => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect {
+          put :update, {:id => transaction.to_param, :transaction => invalid_attributes}, valid_session
+          #expect(response).to render_template("edit")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
   end
@@ -176,13 +184,16 @@ RSpec.describe TransactionsController, type: :controller do
       transaction = Transaction.create! valid_attributes
       expect {
         delete :destroy, {:id => transaction.to_param}, valid_session
-      }.to change(Transaction, :count).by(-1)
+      #}.to change(Transaction, :count).by(-1)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
 
     it "redirects to the transactions list" do
       transaction = Transaction.create! valid_attributes
-      delete :destroy, {:id => transaction.to_param}, valid_session
-      expect(response).to redirect_to(transactions_url)
+      expect {
+        delete :destroy, {:id => transaction.to_param}, valid_session
+        #expect(response).to redirect_to(transactions_url)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
   end
 

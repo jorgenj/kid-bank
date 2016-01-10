@@ -115,28 +115,36 @@ RSpec.describe JournalsController, type: :controller do
 
       it "assigns the requested journal as @journal" do
         journal = Journal.create! valid_attributes
-        put :update, {:id => journal.to_param, :journal => valid_attributes}, valid_session
-        expect(assigns(:journal)).to eq(journal)
+        expect {
+          put :update, {:id => journal.to_param, :journal => valid_attributes}, valid_session
+          #expect(assigns(:journal)).to eq(journal)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "redirects to the journal" do
         journal = Journal.create! valid_attributes
-        put :update, {:id => journal.to_param, :journal => valid_attributes}, valid_session
-        expect(response).to redirect_to(journal)
+        expect {
+          put :update, {:id => journal.to_param, :journal => valid_attributes}, valid_session
+          #expect(response).to redirect_to(journal)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
 
     context "with invalid params" do
       it "assigns the journal as @journal" do
         journal = Journal.create! valid_attributes
-        put :update, {:id => journal.to_param, :journal => invalid_attributes}, valid_session
-        expect(assigns(:journal)).to eq(journal)
+        expect {
+          put :update, {:id => journal.to_param, :journal => invalid_attributes}, valid_session
+          #expect(assigns(:journal)).to eq(journal)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "re-renders the 'edit' template" do
         journal = Journal.create! valid_attributes
-        put :update, {:id => journal.to_param, :journal => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect {
+          put :update, {:id => journal.to_param, :journal => invalid_attributes}, valid_session
+          #expect(response).to render_template("edit")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
   end
@@ -146,13 +154,16 @@ RSpec.describe JournalsController, type: :controller do
       journal = Journal.create! valid_attributes
       expect {
         delete :destroy, {:id => journal.to_param}, valid_session
-      }.to change(Journal, :count).by(-1)
+      #}.to change(Journal, :count).by(-1)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
 
     it "redirects to the journals list" do
       journal = Journal.create! valid_attributes
-      delete :destroy, {:id => journal.to_param}, valid_session
-      expect(response).to redirect_to(journals_url)
+      expect {
+        delete :destroy, {:id => journal.to_param}, valid_session
+        #expect(response).to redirect_to(journals_url)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
   end
 
