@@ -24,11 +24,20 @@ RSpec.describe TransactionsController, type: :controller do
   # Transaction. As you add validations to Transaction, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { transaction_type: 'DEPOSIT', 
+      account_id: create(:account).id,
+      amount: 10_000,
+      journal_id: create(:journal).id,
+      note: 'My first deposit',
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { transaction_type: 'foo', 
+      account_id: nil,
+      amount: nil,
+      note: '',
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -77,6 +86,7 @@ RSpec.describe TransactionsController, type: :controller do
 
       it "assigns a newly created transaction as @transaction" do
         post :create, {:transaction => valid_attributes}, valid_session
+        puts assigns(:transaction).errors.inspect
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
       end

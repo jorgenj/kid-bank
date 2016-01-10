@@ -13,7 +13,7 @@
   <tbody>
     <% @journals.each do |journal| %>
       <tr>
-        <td><%= journal.type %></td>
+        <td><%= journal.transaction_type %></td>
         <td><%= link_to 'Show', journal %></td>
         <td><%= link_to 'Edit', edit_journal_path(journal) %></td>
         <td><%= link_to 'Destroy', journal, method: :delete, data: { confirm: 'Are you sure?' } %></td>

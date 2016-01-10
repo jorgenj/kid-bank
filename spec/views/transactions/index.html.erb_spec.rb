@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "transactions/index", type: :view do
   before(:each) do
     assign(:transactions, [
-      Transaction.create!(),
-      Transaction.create!()
+      create(:transaction),
+      create(:transaction)
     ])
   end
 

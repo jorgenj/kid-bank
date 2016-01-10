@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "journals/edit", type: :view do
   before(:each) do
-    @journal = assign(:journal, Journal.create!())
+    @journal = assign(:journal, create(:journal))
   end
 
   it "renders the edit journal form" do

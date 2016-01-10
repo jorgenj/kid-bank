@@ -24,11 +24,11 @@ RSpec.describe JournalsController, type: :controller do
   # Journal. As you add validations to Journal, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { transaction_type: 'DEPOSIT' }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { transaction_type: 'invalid' }
   }
 
   # This should return the minimal set of values that should be in the session

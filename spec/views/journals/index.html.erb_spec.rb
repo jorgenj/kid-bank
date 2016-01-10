@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "journals/index", type: :view do
   before(:each) do
     assign(:journals, [
-      Journal.create!(),
-      Journal.create!()
+      create(:journal),
+      create(:journal)
     ])
   end
 
