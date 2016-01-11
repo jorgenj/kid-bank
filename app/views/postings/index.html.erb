@@ -16,7 +16,7 @@
         <td><%= posting.account_id %></td>
         <td><%= posting.journal_id %></td>
         <td><%= posting.amount %></td>
-        <td><%= link_to 'Show', posting %></td>
+        <td><%= link_to 'Show', [@journal,posting] %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Posting', new_posting_path %>
+<%= link_to 'New Posting', new_journal_posting_path(@journal) %>

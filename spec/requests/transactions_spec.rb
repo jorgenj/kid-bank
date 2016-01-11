@@ -1,13 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "Transactions", type: :request do
-  before {
-    login_user
+  let(:user) {
+    create(:user)
   }
 
-  describe "GET /transactions" do
+  before {
+    login_user user
+  }
+  
+  let(:account) {
+    create(:account, user: user)
+  }
+
+  describe "GET /accounts/:account_id/transactions" do
     it "works! (now write some real specs)" do
-      get transactions_path
+      get account_transactions_path(account)
       expect(response).to have_http_status(200)
     end
   end

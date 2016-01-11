@@ -15,8 +15,8 @@
         <td><%= account.name %></td>
         <td><%= account.balance %></td>
         <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Deposit', new_transaction_path(transaction: {account: account, transaction_type: 'DEPOSIT'}) %></td>
-        <td><%= link_to 'Withdraw', new_transaction_path(transaction: {account: account, transaction_type: 'WITHDRAWAL'}) %></td>
+        <td><%= link_to 'Deposit', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'DEPOSIT'}) %></td>
+        <td><%= link_to 'Withdraw', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'WITHDRAWAL'}) %></td>
         <td><%= link_to 'Edit', edit_account_path(account) %></td>
       </tr>
     <% end %>

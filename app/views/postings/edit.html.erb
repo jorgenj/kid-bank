@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @posting %> |
-<%= link_to 'Back', postings_path %>
+<%= link_to 'Show', [@journal,@posting] %> |
+<%= link_to 'Back', journal_postings_path(@journal) %>

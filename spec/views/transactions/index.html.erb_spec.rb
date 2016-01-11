@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "transactions/index", type: :view do
   before(:each) do
+    @account = assign(:account, create(:account))
     assign(:transactions, [
-      create(:transaction),
-      create(:transaction)
+      create(:transaction, account: @account),
+      create(:transaction, account: @account)
     ])
   end
 

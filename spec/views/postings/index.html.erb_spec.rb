@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "postings/index", type: :view do
   before(:each) do
+    @journal = assign(:journal, create(:journal))
     assign(:postings, [
-      create(:posting),
-      create(:posting)
+      create(:posting, journal: @journal),
+      create(:posting, journal: @journal)
     ])
   end
 

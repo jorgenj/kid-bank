@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :transactions
-  resources :postings
-  resources :journals
-  resources :accounts
+
+  resources :journals do
+    resources :postings
+  end
+
+  resources :accounts do
+    resources :transactions
+  end
 
   root 'accounts#index'
 

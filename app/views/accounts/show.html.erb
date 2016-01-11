@@ -19,8 +19,8 @@
         <td><%= transaction.transaction_type %></td>
         <td><%= transaction.note %></td>
         <td><%= transaction.amount %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        <td><%= link_to 'Show', [@account,transaction] %></td>
+        <td><%= link_to 'Edit', edit_account_transaction_path(@account,transaction) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,7 +28,7 @@
 
 <br>
 
-<td><%= link_to 'Deposit', new_transaction_path(transaction: {account: @account, transaction_type: 'DEPOSIT'}) %></td>
-<td><%= link_to 'Withdraw', new_transaction_path(transaction: {account: @account, transaction_type: 'WITHDRAWAL'}) %></td>
+<td><%= link_to 'Deposit', new_account_transaction_path(@account, transaction: {transaction_type: 'DEPOSIT'}) %></td>
+<td><%= link_to 'Withdraw', new_account_transaction_path(@account, transaction: {transaction_type: 'WITHDRAWAL'}) %></td>
 <%= link_to 'Back', accounts_path %>
 

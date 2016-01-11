@@ -1,35 +1,36 @@
 class PostingsController < ApplicationController
+  before_action :set_journal
   before_action :set_posting, only: [:show, :edit, :update, :destroy]
 
-  # GET /postings
-  # GET /postings.json
+  # GET /journals/:journal_id/postings
+  # GET /journals/:journal_id/postings.json
   def index
-    @postings = Posting.all
+    @postings = @journal.postings.all
   end
 
-  # GET /postings/1
-  # GET /postings/1.json
+  # GET /journals/:journal_id/postings/1
+  # GET /journals/:journal_id/postings/1.json
   def show
   end
 
-  # GET /postings/new
+  # GET /journals/:journal_id/postings/new
   def new
-    @posting = Posting.new
+    @posting = @journal.postings.new
   end
 
-  # GET /postings/1/edit
+  # GET /journals/:journal_id/postings/1/edit
   #def edit
   #end
 
-  # POST /postings
-  # POST /postings.json
+  # POST /journals/:journal_id/postings
+  # POST /journals/:journal_id/postings.json
   def create
-    @posting = Posting.new(posting_params)
+    @posting = @journal.postings.new(posting_params)
 
     respond_to do |format|
       if @posting.save
-        format.html { redirect_to @posting, notice: 'Posting was successfully created.' }
-        format.json { render :show, status: :created, location: @posting }
+        format.html { redirect_to @journal, notice: 'Posting was successfully created.' }
+        format.json { render :show, status: :created, location: @journal }
       else
         format.html { render :new }
         format.json { render json: @posting.errors, status: :unprocessable_entity }
@@ -37,13 +38,13 @@ class PostingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /postings/1
-  # PATCH/PUT /postings/1.json
+  # PATCH/PUT /journals/:journal_id/postings/1
+  # PATCH/PUT /journals/:journal_id/postings/1.json
   #def update
   #  respond_to do |format|
   #    if @posting.update(posting_params)
-  #      format.html { redirect_to @posting, notice: 'Posting was successfully updated.' }
-  #      format.json { render :show, status: :ok, location: @posting }
+  #      format.html { redirect_to @journal, notice: 'Posting was successfully updated.' }
+  #      format.json { render :show, status: :ok, location: @journal }
   #    else
   #      format.html { render :edit }
   #      format.json { render json: @posting.errors, status: :unprocessable_entity }
@@ -51,8 +52,8 @@ class PostingsController < ApplicationController
   #  end
   #end
 
-  # DELETE /postings/1
-  # DELETE /postings/1.json
+  # DELETE /journals/:journal_id/postings/1
+  # DELETE /journals/:journal_id/postings/1.json
   #def destroy
   #  @posting.destroy
   #  respond_to do |format|
@@ -62,13 +63,17 @@ class PostingsController < ApplicationController
   #end
 
   private
+    def set_journal
+      @journal = Journal.find(params[:journal_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_posting
-      @posting = Posting.find(params[:id])
+      @posting = @journal.postings.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def posting_params
-      params.require(:posting).permit(:account_id, :journal_id, :amount)
+      params.require(:posting).permit(:account_id, :amount)
     end
 end
