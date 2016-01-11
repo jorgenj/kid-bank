@@ -19,16 +19,20 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe PostingsController, type: :controller do
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Posting. As you add validations to Posting, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { account_id: create(:account).id,
+      journal_id: create(:journal).id,
+      amount: 10_000,
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { amount: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,40 +107,50 @@ RSpec.describe PostingsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        #skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested posting" do
         posting = Posting.create! valid_attributes
-        put :update, {:id => posting.to_param, :posting => new_attributes}, valid_session
-        posting.reload
-        skip("Add assertions for updated state")
+        expect {
+          put :update, {:id => posting.to_param, :posting => new_attributes}, valid_session
+          #posting.reload
+          #skip("Add assertions for updated state")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "assigns the requested posting as @posting" do
         posting = Posting.create! valid_attributes
-        put :update, {:id => posting.to_param, :posting => valid_attributes}, valid_session
-        expect(assigns(:posting)).to eq(posting)
+        expect {
+          put :update, {:id => posting.to_param, :posting => valid_attributes}, valid_session
+          #expect(assigns(:posting)).to eq(posting)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "redirects to the posting" do
         posting = Posting.create! valid_attributes
-        put :update, {:id => posting.to_param, :posting => valid_attributes}, valid_session
-        expect(response).to redirect_to(posting)
+        expect {
+          put :update, {:id => posting.to_param, :posting => valid_attributes}, valid_session
+          #expect(response).to redirect_to(posting)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
 
     context "with invalid params" do
       it "assigns the posting as @posting" do
         posting = Posting.create! valid_attributes
-        put :update, {:id => posting.to_param, :posting => invalid_attributes}, valid_session
-        expect(assigns(:posting)).to eq(posting)
+        expect {
+          put :update, {:id => posting.to_param, :posting => invalid_attributes}, valid_session
+          #expect(assigns(:posting)).to eq(posting)
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "re-renders the 'edit' template" do
         posting = Posting.create! valid_attributes
-        put :update, {:id => posting.to_param, :posting => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        expect {
+          put :update, {:id => posting.to_param, :posting => invalid_attributes}, valid_session
+          #expect(response).to render_template("edit")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
     end
   end
@@ -146,13 +160,16 @@ RSpec.describe PostingsController, type: :controller do
       posting = Posting.create! valid_attributes
       expect {
         delete :destroy, {:id => posting.to_param}, valid_session
-      }.to change(Posting, :count).by(-1)
+      #}.to change(Posting, :count).by(-1)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
 
     it "redirects to the postings list" do
       posting = Posting.create! valid_attributes
-      delete :destroy, {:id => posting.to_param}, valid_session
-      expect(response).to redirect_to(postings_url)
+      expect {
+        delete :destroy, {:id => posting.to_param}, valid_session
+        #expect(response).to redirect_to(postings_url)
+      }.to raise_error(AbstractController::ActionNotFound)
     end
   end
 

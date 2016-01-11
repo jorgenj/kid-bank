@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Postings", type: :request do
+  before {
+    login_user
+  }
+
   describe "GET /postings" do
     it "works! (now write some real specs)" do
       get postings_path

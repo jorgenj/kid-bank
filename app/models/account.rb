@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  resourcify
+
   # double-entry book-keeping design based on this article:
   # http://web.archive.org/web/20131013080026/http://homepages.tcp.co.uk/~m-wigley/gc_wp_ded.html
 
@@ -8,6 +10,8 @@ class Account < ActiveRecord::Base
   def self.user_accounts
     where(arel_table[:id].not_in(1))
   end
+
+  validates :name, presence: true
 
   ## TODO: cache on updates to postings
   def balance

@@ -19,6 +19,8 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe TransactionsController, type: :controller do
+  login_user
+
   let!(:cash_account) {
     create(:account, name: 'CASH')
   }
@@ -92,7 +94,6 @@ RSpec.describe TransactionsController, type: :controller do
 
       it "assigns a newly created transaction as @transaction" do
         post :create, {:transaction => valid_attributes}, valid_session
-        puts assigns(:transaction).errors.inspect
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
 
@@ -133,14 +134,16 @@ RSpec.describe TransactionsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        #skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested transaction" do
         transaction = Transaction.create! valid_attributes
-        put :update, {:id => transaction.to_param, :transaction => new_attributes}, valid_session
-        transaction.reload
-        skip("Add assertions for updated state")
+        expect {
+          put :update, {:id => transaction.to_param, :transaction => new_attributes}, valid_session
+          #transaction.reload
+          #skip("Add assertions for updated state")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "assigns the requested transaction as @transaction" do

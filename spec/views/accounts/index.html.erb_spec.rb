@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "accounts/index", type: :view do
   before(:each) do
     assign(:accounts, [
-      Account.create!(),
-      Account.create!()
+      create(:account),
+      create(:account)
     ])
   end
 

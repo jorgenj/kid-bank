@@ -1,4 +1,6 @@
 class Transaction < ActiveRecord::Base
+  resourcify
+
   belongs_to :account
   belongs_to :journal
 

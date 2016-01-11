@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "accounts/show", type: :view do
   before(:each) do
-    @account = assign(:account, Account.create!())
+    @account = assign(:account, create(:account))
   end
 
   it "renders attributes in <p>" do

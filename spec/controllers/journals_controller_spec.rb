@@ -19,6 +19,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe JournalsController, type: :controller do
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Journal. As you add validations to Journal, be sure to
@@ -103,14 +104,16 @@ RSpec.describe JournalsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        #skip("Add a hash of attributes valid for your model")
       }
 
       it "updates the requested journal" do
         journal = Journal.create! valid_attributes
-        put :update, {:id => journal.to_param, :journal => new_attributes}, valid_session
-        journal.reload
-        skip("Add assertions for updated state")
+        expect {
+          put :update, {:id => journal.to_param, :journal => new_attributes}, valid_session
+          journal.reload
+          skip("Add assertions for updated state")
+        }.to raise_error(AbstractController::ActionNotFound)
       end
 
       it "assigns the requested journal as @journal" do

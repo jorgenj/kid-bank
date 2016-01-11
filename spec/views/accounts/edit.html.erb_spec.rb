@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "accounts/edit", type: :view do
   before(:each) do
-    @account = assign(:account, Account.create!())
+    @account = assign(:account, create(:account))
   end
 
   it "renders the edit account form" do
