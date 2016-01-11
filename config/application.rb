@@ -22,5 +22,8 @@ module Banked
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    ## base url for mailers
+    config.action_mailer.default_url_options = { host: ENV['MAILER_BASE_URL_HOSTNAME'] }
   end
 end

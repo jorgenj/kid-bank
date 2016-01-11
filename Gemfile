@@ -56,5 +56,10 @@ gem 'rails_12factor', group: :production
 gem 'puma'
 
 gem 'rails-footnotes', '~> 4.0'
+gem 'rack-timeout'
+
+gem 'devise'
+gem 'cancancan'
+gem 'rolify'
 
 ruby "2.2.3"
