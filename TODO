@@ -1,0 +1,9 @@
+Scheduled interest earnings for accounts
+Send email for weekly earnings
+Show balance_after for each transaction
+Cache balance for account after posting
+Transaction edit should only allow edit of note
+Send email for weekly activity (deposits, withdrawals, earnings)
+10-minute scheduled job to keep app alive during waking hours
+Setup papertrail logs
+Make views work in mobile
