@@ -7,3 +7,12 @@ Send email for weekly activity (deposits, withdrawals, earnings)
 10-minute scheduled job to keep app alive during waking hours
 Setup papertrail logs
 Make views work in mobile
+
+GA needs:
+specs for signup flows
+make it perty
+FAQ
+landing page
+instrument/metrics
+alarm on errors
+continuous deployment
