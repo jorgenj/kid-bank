@@ -9,6 +9,8 @@ class Account < ActiveRecord::Base
 
   belongs_to :user
 
+  before_save :update_balance
+
   def self.user_accounts
     where(arel_table[:id].not_in(1))
   end
@@ -16,12 +18,11 @@ class Account < ActiveRecord::Base
   validates :name, presence: true
   validates :user_id, presence: true
 
-  ## TODO: cache on updates to postings
-  def balance
-    postings.sum(:amount)
-  end
-
   def self.cash_account
     find(1)
+  end
+
+  def update_balance
+    self.balance = postings(true).sum(:amount)
   end
 end

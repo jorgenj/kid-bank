@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111051129) do
+ActiveRecord::Schema.define(version: 20160112014120) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.integer  "balance"
   end
 
   create_table "journals", force: :cascade do |t|
@@ -30,8 +31,10 @@ ActiveRecord::Schema.define(version: 20160111051129) do
     t.integer  "account_id"
     t.integer  "journal_id"
     t.integer  "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "start_balance"
+    t.integer  "end_balance"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -53,6 +56,8 @@ ActiveRecord::Schema.define(version: 20160111051129) do
     t.string   "note"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.integer  "start_balance"
+    t.integer  "end_balance"
   end
 
   create_table "users", force: :cascade do |t|

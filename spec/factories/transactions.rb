@@ -7,4 +7,12 @@ FactoryGirl.define do
       note 'my note'
       amount 10_0000 #$10 in pennies
     end
+
+    factory :deposit, parent: :transaction do
+      transaction_type 'DEPOSIT'
+    end
+
+    factory :withdrawal, parent: :transaction do
+      transaction_type 'WITHDRAWAL'
+    end
 end
