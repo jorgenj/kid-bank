@@ -9,9 +9,17 @@ FactoryGirl.define do
 
     factory :cash_account, parent: :account do
       name "CASH"
+
+      after(:create) { |account|
+        create(:system_account, account: account, name: account.name)
+      }
     end
 
     factory :interest_account, parent: :account do
       name "INTEREST"
+
+      after(:create) { |account|
+        create(:system_account, account: account, name: account.name)
+      }
     end
 end

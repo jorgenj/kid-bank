@@ -16,7 +16,8 @@ class Account < ActiveRecord::Base
   validates :user_id, presence: true
   
   def self.user_accounts
-    where.not(id: 1).where.not(name: 'INTEREST')
+    system_account_ids = SystemAccount.all.select(:account_id).arel
+    where(arel_table[:id].not_in(system_account_ids))
   end
 
   scope :without_earnings, ->(date) {
@@ -25,11 +26,11 @@ class Account < ActiveRecord::Base
   }
 
   def self.cash_account
-    find(1)
+    SystemAccount.cash.account
   end
 
   def self.interest_account
-    where(name: 'INTEREST').take
+    SystemAccount.interest.account
   end
 
   def update_balance

@@ -1,5 +1,5 @@
-Scheduled interest earnings for accounts
 Add system-accounts table, to reference cash & interest accounts
+Scheduled interest earnings for accounts
 Send email for weekly earnings
 Show balance_after for each transaction
 Transaction edit should only allow edit of note
@@ -7,8 +7,11 @@ Send email for weekly activity (deposits, withdrawals, earnings)
 10-minute scheduled job to keep app alive during waking hours
 Setup papertrail logs
 Make views work in mobile
+On withdrawal, show what earnings the user is giving up for next N days/weeks/months
+Account stats, show earnings over time, estimate earnings for specific date in future
 
-GA needs:
+GA needs
+==========
 specs for signup flows
 make it perty
 FAQ
@@ -16,3 +19,8 @@ landing page
 instrument/metrics
 alarm on errors
 continuous deployment
+
+OTHER IDEAS
+============
+Payment portal for chores, parent creates jobs the kid can do to earn money
+Virtual stock-market functionality, for when the kids get older

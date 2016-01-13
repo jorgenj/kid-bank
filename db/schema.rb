@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112052027) do
+ActiveRecord::Schema.define(version: 20160113024355) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +61,13 @@ ActiveRecord::Schema.define(version: 20160112052027) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "system_accounts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "transactions", force: :cascade do |t|
     t.string   "transaction_type"

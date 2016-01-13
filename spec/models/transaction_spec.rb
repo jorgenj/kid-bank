@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
-  let!(:cash_account) { create(:cash_account) }
-
   describe 'deposit?' do
     it 'should work' do
       expect(Transaction.new(transaction_type: 'DEPOSIT')).to be_deposit

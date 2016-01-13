@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Journal, type: :model do
-  let!(:cash_account) {
-    create(:cash_account)
-  }
-
   describe 'deposit!' do
     let(:acct) {
       create(:account)
@@ -20,7 +16,7 @@ RSpec.describe Journal, type: :model do
       j = Journal.last
       expect(j.postings.sum(:amount)).to eq(0)
 
-      expect(j.postings[0].account).to eq(cash_account)
+      expect(j.postings[0].account).to eq(Account.cash_account)
       expect(j.postings[0].amount).to eq(-10_000)
 
       expect(j.postings[1].account).to eq(acct)
@@ -62,7 +58,7 @@ RSpec.describe Journal, type: :model do
       expect(j.postings[0].account).to eq(acct)
       expect(j.postings[0].amount).to eq(-10_000)
 
-      expect(j.postings[1].account).to eq(cash_account)
+      expect(j.postings[1].account).to eq(Account.cash_account)
       expect(j.postings[1].amount).to eq(10_000)
     end
 

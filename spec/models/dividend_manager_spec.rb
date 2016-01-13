@@ -1,13 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe DividendManager, type: :model do
-  let!(:cash_account) {
-    create(:cash_account)
-  }
-  let!(:interest_account) {
-    create(:interest_account)
-  }
-
   let(:account) {
     create(:account, daily_percentage_rate: '0.01', balance: 100).tap do |acct|
       create(:deposit, account: acct, amount: 100)
@@ -80,6 +73,11 @@ RSpec.describe DividendManager, type: :model do
 
       account.reload
       expect(account.balance).to eq(107)
+
+      posting = account.postings.last
+      expect(posting.amount).to eq(7)
+      other_posting = posting.journal.postings.to_a - [posting]
+      expect(other_posting.map(&:account)).to match_array([Account.interest_account])
     end
   end
 end
