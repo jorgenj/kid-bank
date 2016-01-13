@@ -10,4 +10,8 @@ FactoryGirl.define do
     factory :cash_account, parent: :account do
       name "CASH"
     end
+
+    factory :interest_account, parent: :account do
+      name "INTEREST"
+    end
 end

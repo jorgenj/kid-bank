@@ -5,7 +5,7 @@ class Journal < ActiveRecord::Base
 
   validates :transaction_type, 
     presence: true,
-    inclusion: { in: %w(DEPOSIT WITHDRAWAL TRANSFER) }
+    inclusion: { in: %w(DEPOSIT WITHDRAWAL TRANSFER INTEREST) }
 
   #TODO: validate sum total of all postings nets to zero
   #TODO: validate postings count > 0

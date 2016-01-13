@@ -27,7 +27,15 @@ class Posting < ActiveRecord::Base
   end
 
   def update_account_balance
-    account.update_balance if account.present?
-    account.save!
+    if account.present?
+      ## have to load acct directly/separately
+      ## otherwise we get a strange error where
+      ## activeRecord would think it still needs to insert the Transaction
+      ## that spawned this journal/posting, but would only insert the single
+      ## journal_id attribute
+      acct = Account.find(account_id)
+      acct.update_balance
+      acct.save!
+    end
   end
 end
