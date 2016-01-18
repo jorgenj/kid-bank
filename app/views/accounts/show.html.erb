@@ -1,6 +1,13 @@
 <h1>Account: <%= @account.name %></h1>
 <%= link_to 'Edit', edit_account_path(@account) %>
 
+<h2>Details</h2>
+<p>
+    <b>Balance:</b> <%= display_amount(@account.balance) %><br><br>
+    <b>Annual percentage rage:</b> <%= @account.annual_percentage_rate %><br>
+    (Current balance would earn <%= display_amount(@account.interest_earned(7.days)) %> per week, <%= display_amount(@account.interest_earned(1.year)) %> per year)
+</p>
+
 <h2>Transactions</h2>
 
 <table>
@@ -18,7 +25,7 @@
       <tr>
         <td><%= transaction.transaction_type %></td>
         <td><%= transaction.note %></td>
-        <td><%= transaction.amount %></td>
+        <td><%= display_amount(transaction.amount) %></td>
         <td><%= link_to 'Show', [@account,transaction] %></td>
         <td><%= link_to 'Edit', edit_account_transaction_path(@account,transaction) %></td>
       </tr>

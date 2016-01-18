@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Balance</th>
+      <th>APY</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= account.name %></td>
         <td><%= account.balance %></td>
+        <td><%= account.annual_percentage_rate %></td>
         <td><%= link_to 'Show', account %></td>
         <td><%= link_to 'Deposit', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'DEPOSIT'}) %></td>
         <td><%= link_to 'Withdraw', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'WITHDRAWAL'}) %></td>

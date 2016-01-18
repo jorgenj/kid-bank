@@ -11,6 +11,7 @@ class Account < ActiveRecord::Base
   belongs_to :user
 
   before_save :update_balance
+  before_save :calc_percentages
 
   validates :name, presence: true
   validates :user_id, presence: true
@@ -35,5 +36,23 @@ class Account < ActiveRecord::Base
 
   def update_balance
     self.balance = postings(true).sum(:amount)
+  end
+
+  def calc_percentages
+    unless annual_percentage_rate.nil?
+      self.daily_percentage_rate = annual_percentage_rate / 365
+      self.weekly_percentage_rate = daily_percentage_rate * 7
+    end
+  end
+
+  def dpy
+    BigDecimal.new(self.annual_percentage_rate) / (100 * 365)
+  end
+
+  def interest_earned(period, principal=self.balance)
+    num_days = (period / 1.day).to_i
+    rate = (1 + dpy)**num_days
+    end_balance = (principal * rate)
+    end_balance.to_i - principal
   end
 end

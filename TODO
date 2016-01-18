@@ -1,4 +1,4 @@
-Add system-accounts table, to reference cash & interest accounts
+Account create needs to setup APY
 Scheduled interest earnings for accounts
 Send email for weekly earnings
 Show balance_after for each transaction
