@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DividendManager, type: :model do
   let(:account) {
-    create(:account, daily_percentage_rate: '0.01', balance: 100).tap do |acct|
-      create(:deposit, account: acct, amount: 100)
+    create(:account, annual_percentage_rate: '4').tap do |acct|
+      create(:deposit, account: acct, amount: 100_00)
     end
   }
 
@@ -35,10 +35,29 @@ RSpec.describe DividendManager, type: :model do
       accrual = InterestAccrual.last
       expect(accrual.account).to eq(account)
       expect(accrual.accrued_on).to eq(date.to_date)
-      expect(accrual.account_end_balance).to eq(100)
-      expect(accrual.amount).to eq(1.0)
+      expect(accrual.account_end_balance).to eq(100_00)
+      expect(accrual.amount).to eq(1)
       expect(accrual.applied).to be_falsey
       expect(accrual.applied_at).to be_nil
+    end
+  end
+
+  describe 'the math' do
+    it 'should be corrects' do
+      expect(account.postings.sum(:amount)).to eq(100_00)
+      expect(account.dpy).to be_within(0.00000001).of(0.00010958904109589)
+
+      jan1 = Date.parse('2015-01-01')
+      dec31 = Date.parse('2015-12-31')
+
+      Range.new(jan1, dec31).each do |date|
+        DividendManager.add_missing_accruals(date)
+        DividendManager.apply_earnings(date)
+      end
+
+      account.reload
+      expect(account.postings.sum(:amount)).to eq(103_61)
+      expect(account.balance).to eq(103_61)
     end
   end
 
@@ -74,7 +93,7 @@ RSpec.describe DividendManager, type: :model do
       }.from(10).to(3)
 
       account.reload
-      expect(account.balance).to eq(107)
+      expect(account.balance).to eq(10007)
 
       posting = account.postings.last
       expect(posting.amount).to eq(7)

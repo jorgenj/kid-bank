@@ -16,7 +16,7 @@ class DividendManager
           accrual = account.interest_accruals.create!(
             accrued_on: date,
             account_end_balance: account.balance,
-            amount: account.balance * account.daily_percentage_rate,
+            amount: account.balance * account.dpy,
             applied: false,
           )
           Rails.logger.info "Added accrual : #{accrual.inspect}"
