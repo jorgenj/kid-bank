@@ -58,7 +58,7 @@ class DividendManager
           Rails.logger.info "Earnings of #{earnings} to apply for #{account.inspect}"
 
           if earnings > 0
-            Journal.transfer!(interest_src_account, account, earnings, 'INTEREST')
+            Journal.transfer!(interest_src_account, account, earnings, 'INTEREST', "Interest accrued - #{date.to_date}")
           else
             Rails.logger.info "Skipped applying #{earnings} to #{account.inspect}"
           end

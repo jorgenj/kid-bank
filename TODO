@@ -1,10 +1,12 @@
-Account create needs to setup APY
-Scheduled interest earnings for accounts
+INTEREST EARNINGS DON'T SHOW IN ACCOUNT TRANSACTIONS
+Schedule interest earnings for accounts
 Send email for weekly earnings
+10-minute scheduled job to keep app alive during waking hours
+
+Account create needs to setup APY
 Show balance_after for each transaction
 Transaction edit should only allow edit of note
 Send email for weekly activity (deposits, withdrawals, earnings)
-10-minute scheduled job to keep app alive during waking hours
 Setup papertrail logs
 Make views work in mobile
 On withdrawal, show what earnings the user is giving up for next N days/weeks/months

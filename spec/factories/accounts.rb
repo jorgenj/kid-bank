@@ -1,6 +1,7 @@
 FactoryGirl.define do
     factory :account do
       name "account name"
+      annual_percentage_rate 5.0
 
       before(:create) { |account|
         account.user = create(:user) if account.user.nil?
