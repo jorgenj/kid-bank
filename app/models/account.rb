@@ -22,6 +22,7 @@ class Account < ActiveRecord::Base
   end
 
   scope :without_earnings, ->(date) {
+    date = date.to_date if date.respond_to?(:to_date)
     accts_with_earnings = InterestAccrual.where('accrued_on = ?', date).select(:account_id).arel
     where(arel_table[:id].not_in(accts_with_earnings))
   }

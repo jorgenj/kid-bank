@@ -9,7 +9,8 @@ RSpec.describe DividendManager, type: :model do
 
   describe 'add_missing_earnings' do
     it 'should add interest accruals' do
-      date = Date.yesterday
+      date = 2.days.ago
+      expect(date).to be < Date.today
 
       expect(account.interest_accruals).to be_empty
       expect(Account.user_accounts).to match_array([account])
@@ -33,7 +34,7 @@ RSpec.describe DividendManager, type: :model do
 
       accrual = InterestAccrual.last
       expect(accrual.account).to eq(account)
-      expect(accrual.accrued_on).to eq(date)
+      expect(accrual.accrued_on).to eq(date.to_date)
       expect(accrual.account_end_balance).to eq(100)
       expect(accrual.amount).to eq(1.0)
       expect(accrual.applied).to be_falsey
@@ -43,7 +44,7 @@ RSpec.describe DividendManager, type: :model do
 
   describe 'apply_earnings' do
     let(:sunday) {
-      date = Date.yesterday
+      date = 2.days.ago
       until date.sunday?
         date = date - 1.day
       end
@@ -52,6 +53,7 @@ RSpec.describe DividendManager, type: :model do
 
     it 'should work' do
       expect(sunday).to be_sunday
+      expect(sunday).to be < Date.today
 
       expect(account.interest_accruals).to be_empty
       expect(Account.user_accounts).to match_array([account])

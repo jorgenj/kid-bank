@@ -1,5 +1,10 @@
 class DividendManager
   def self.add_missing_accruals(date = Date.yesterday)
+    unless date < Date.today
+      Rails.logger.warn "Skipping interest accruals, #{date} is not in the past yet"
+      return
+    end
+
     Account.user_accounts.without_earnings(date).find_each do |account|
       Rails.logger.info "Adding accrual for account : #{account.inspect}"
       begin
@@ -24,8 +29,14 @@ class DividendManager
   end
 
   def self.apply_earnings(date = Date.yesterday)
-    return unless date.sunday?
-    return unless date < Date.today
+    unless date.sunday?
+      Rails.logger.warn "Skipping applying earnings for #{date}, #{Date::DAYNAMES[date.wday]} not a sunday!"
+      return
+    end
+    unless date < Date.today
+      Rails.logger.warn "Skipping apply earnings for #{date}, it's not in the past yet!"
+      return
+    end
 
     interest_src_account = Account.interest_account
 
@@ -39,11 +50,18 @@ class DividendManager
             .where(applied: false)
             .where('accrued_on > ? AND accrued_on <= ?', prev_sunday, date)
 
+          next if accruals.empty?
+
           earnings = accruals.sum(:amount)
+
           accruals.update_all(applied: true, applied_at: Time.now)
           Rails.logger.info "Earnings of #{earnings} to apply for #{account.inspect}"
 
-          Journal.transfer!(interest_src_account, account, earnings, 'INTEREST')
+          if earnings > 0
+            Journal.transfer!(interest_src_account, account, earnings, 'INTEREST')
+          else
+            Rails.logger.info "Skipped applying #{earnings} to #{account.inspect}"
+          end
         end
       rescue => e
         Rails.logger.fatal "Failed to transfer interest to account : #{account.inspect} : #{e.message}"
