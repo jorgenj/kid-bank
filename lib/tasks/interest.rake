@@ -21,7 +21,7 @@ namespace :banked do
       unless date_str.nil? || date_str.empty?
         Date.parse(date_str)
       else
-        8.hours.ago.to_date
+        4.hours.ago.to_date
       end
     end
   end
