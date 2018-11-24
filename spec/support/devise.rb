@@ -1,6 +1,7 @@
 module RequestMacros
   def login_user(user = FactoryBot.create(:user))
-    post_via_redirect '/users/sign_in', user: {email: user.email, password: 's3cr3tp4ssw0rd'} 
+    post '/users/sign_in', params: {user: {email: user.email, password: 's3cr3tp4ssw0rd'}}
+    follow_redirect!
   end
 
   def login_admin
@@ -32,7 +33,7 @@ module ControllerMacros
 end
 
 RSpec.configure do |config|
-  config.include Devise::TestHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 
   config.include RequestMacros, :type => :request
