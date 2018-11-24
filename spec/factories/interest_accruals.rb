@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :interest_accrual do
     association :account
     accrued_on { Date.yesterday }

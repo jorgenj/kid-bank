@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
     factory :account do
       name "account name"
       annual_percentage_rate 5.0

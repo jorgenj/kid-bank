@@ -1,17 +1,17 @@
 module RequestMacros
-  def login_user(user = FactoryGirl.create(:user))
+  def login_user(user = FactoryBot.create(:user))
     post_via_redirect '/users/sign_in', user: {email: user.email, password: 's3cr3tp4ssw0rd'} 
   end
 
   def login_admin
-    login_user(FactoryGirl.create(:admin))
+    login_user(FactoryBot.create(:admin))
   end
 end
 
 module ControllerMacros
   def login_admin
     let(:current_user) {
-      FactoryGirl.create(:admin)
+      FactoryBot.create(:admin)
     }
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
@@ -21,7 +21,7 @@ module ControllerMacros
 
   def login_user
     let(:current_user) {
-      FactoryGirl.create(:user)
+      FactoryBot.create(:user)
     }
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
