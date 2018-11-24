@@ -1,4 +1,4 @@
-class Journal < ActiveRecord::Base
+class Journal < ApplicationRecord
   resourcify
 
   has_many :postings

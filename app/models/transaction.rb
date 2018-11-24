@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class Transaction < ApplicationRecord
   resourcify
 
   belongs_to :account

@@ -1,4 +1,4 @@
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
   resourcify
 
   # double-entry book-keeping design based on this article:
@@ -36,7 +36,7 @@ class Account < ActiveRecord::Base
   end
 
   def update_balance
-    self.balance = postings(true).sum(:amount)
+    self.balance = postings.reload.sum(:amount)
   end
 
   def calc_percentages

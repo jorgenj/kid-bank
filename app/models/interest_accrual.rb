@@ -1,4 +1,4 @@
-class InterestAccrual < ActiveRecord::Base
+class InterestAccrual < ApplicationRecord
   resourcify
 
   belongs_to :account

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '~> 5.0'
 
 group :development do
     # Use sqlite3 as the database for Active Record
@@ -43,6 +43,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
 end
 
 group :test do
@@ -69,4 +70,4 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
-ruby "2.2.3"
+ruby "2.5.3"

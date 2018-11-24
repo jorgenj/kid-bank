@@ -47,7 +47,7 @@ RSpec.describe PostingsController, type: :controller do
   describe "GET #index" do
     it "assigns all postings as @postings" do
       posting = Posting.create! valid_attributes
-      get :index, {journal_id: journal.id}, valid_session
+      get :index, params: {journal_id: journal.id}, session: valid_session
       expect(assigns(:postings)).to eq([posting])
     end
   end
@@ -55,14 +55,14 @@ RSpec.describe PostingsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested posting as @posting" do
       posting = Posting.create! valid_attributes
-      get :show, {:id => posting.to_param, journal_id: journal.id}, valid_session
+      get :show, params: {:id => posting.to_param, journal_id: journal.id}, session: valid_session
       expect(assigns(:posting)).to eq(posting)
     end
   end
 
   describe "GET #new" do
     it "assigns a new posting as @posting" do
-      get :new, {journal_id: journal.id}, valid_session
+      get :new, params: {journal_id: journal.id}, session: valid_session
       expect(assigns(:posting)).to be_a_new(Posting)
     end
   end
@@ -70,7 +70,7 @@ RSpec.describe PostingsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested posting as @posting" do
       posting = Posting.create! valid_attributes
-      get :edit, {:id => posting.to_param, journal_id: journal.id}, valid_session
+      get :edit, params: {:id => posting.to_param, journal_id: journal.id}, session: valid_session
       expect(assigns(:posting)).to eq(posting)
     end
   end
@@ -79,30 +79,30 @@ RSpec.describe PostingsController, type: :controller do
     context "with valid params" do
       it "creates a new Posting" do
         expect {
-          post :create, {:posting => valid_attributes, journal_id: journal.id}, valid_session
+          post :create, params: {:posting => valid_attributes, journal_id: journal.id}, session: valid_session
         }.to change(Posting, :count).by(1)
       end
 
       it "assigns a newly created posting as @posting" do
-        post :create, {:posting => valid_attributes, journal_id: journal.id}, valid_session
+        post :create, params: {:posting => valid_attributes, journal_id: journal.id}, session: valid_session
         expect(assigns(:posting)).to be_a(Posting)
         expect(assigns(:posting)).to be_persisted
       end
 
       it "redirects to the created posting" do
-        post :create, {:posting => valid_attributes, journal_id: journal.id}, valid_session
+        post :create, params: {:posting => valid_attributes, journal_id: journal.id}, session: valid_session
         expect(response).to redirect_to(journal)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved posting as @posting" do
-        post :create, {:posting => invalid_attributes, journal_id: journal.id}, valid_session
+        post :create, params: {:posting => invalid_attributes, journal_id: journal.id}, session: valid_session
         expect(assigns(:posting)).to be_a_new(Posting)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:posting => invalid_attributes, journal_id: journal.id}, valid_session
+        post :create, params: {:posting => invalid_attributes, journal_id: journal.id}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe PostingsController, type: :controller do
       it "updates the requested posting" do
         posting = Posting.create! valid_attributes
         expect {
-          put :update, {:id => posting.to_param, :posting => new_attributes, journal_id: journal.id}, valid_session
+          put :update, params: {:id => posting.to_param, :posting => new_attributes, journal_id: journal.id}, session: valid_session
           #posting.reload
           #skip("Add assertions for updated state")
         }.to raise_error(AbstractController::ActionNotFound)
@@ -126,7 +126,7 @@ RSpec.describe PostingsController, type: :controller do
       it "assigns the requested posting as @posting" do
         posting = Posting.create! valid_attributes
         expect {
-          put :update, {:id => posting.to_param, :posting => valid_attributes, journal_id: journal.id}, valid_session
+          put :update, params: {:id => posting.to_param, :posting => valid_attributes, journal_id: journal.id}, session: valid_session
           #expect(assigns(:posting)).to eq(posting)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -134,7 +134,7 @@ RSpec.describe PostingsController, type: :controller do
       it "redirects to the posting" do
         posting = Posting.create! valid_attributes
         expect {
-          put :update, {:id => posting.to_param, :posting => valid_attributes, journal_id: journal.id}, valid_session
+          put :update, params: {:id => posting.to_param, :posting => valid_attributes, journal_id: journal.id}, session: valid_session
           #expect(response).to redirect_to(posting)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -144,7 +144,7 @@ RSpec.describe PostingsController, type: :controller do
       it "assigns the posting as @posting" do
         posting = Posting.create! valid_attributes
         expect {
-          put :update, {:id => posting.to_param, :posting => invalid_attributes, journal_id: journal.id}, valid_session
+          put :update, params: {:id => posting.to_param, :posting => invalid_attributes, journal_id: journal.id}, session: valid_session
           #expect(assigns(:posting)).to eq(posting)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -152,7 +152,7 @@ RSpec.describe PostingsController, type: :controller do
       it "re-renders the 'edit' template" do
         posting = Posting.create! valid_attributes
         expect {
-          put :update, {:id => posting.to_param, :posting => invalid_attributes, journal_id: journal.id}, valid_session
+          put :update, params: {:id => posting.to_param, :posting => invalid_attributes, journal_id: journal.id}, session: valid_session
           #expect(response).to render_template("edit")
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -163,7 +163,7 @@ RSpec.describe PostingsController, type: :controller do
     it "destroys the requested posting" do
       posting = Posting.create! valid_attributes
       expect {
-        delete :destroy, {:id => posting.to_param, journal_id: journal.id}, valid_session
+        delete :destroy, params: {:id => posting.to_param, journal_id: journal.id}, session: valid_session
       #}.to change(Posting, :count).by(-1)
       }.to raise_error(AbstractController::ActionNotFound)
     end
@@ -171,7 +171,7 @@ RSpec.describe PostingsController, type: :controller do
     it "redirects to the postings list" do
       posting = Posting.create! valid_attributes
       expect {
-        delete :destroy, {:id => posting.to_param, journal_id: journal.id}, valid_session
+        delete :destroy, params: {:id => posting.to_param, journal_id: journal.id}, session: valid_session
         #expect(response).to redirect_to(postings_url)
       }.to raise_error(AbstractController::ActionNotFound)
     end

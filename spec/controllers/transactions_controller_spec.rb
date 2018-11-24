@@ -56,7 +56,7 @@ RSpec.describe TransactionsController, type: :controller do
   describe "GET #index" do
     it "assigns all transactions as @transactions" do
       transaction = Transaction.create! valid_attributes
-      get :index, {account_id: account.id}, valid_session
+      get :index, params: {account_id: account.id}, session: valid_session
       expect(assigns(:transactions)).to eq([transaction])
     end
   end
@@ -64,14 +64,14 @@ RSpec.describe TransactionsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested transaction as @transaction" do
       transaction = Transaction.create! valid_attributes
-      get :show, {:id => transaction.to_param, account_id: account.id}, valid_session
+      get :show, params: {:id => transaction.to_param, account_id: account.id}, session: valid_session
       expect(assigns(:transaction)).to eq(transaction)
     end
   end
 
   describe "GET #new" do
     it "assigns a new transaction as @transaction" do
-      get :new, {account_id: account.id}, valid_session
+      get :new, params: {account_id: account.id}, session: valid_session
       expect(assigns(:transaction)).to be_a_new(Transaction)
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe TransactionsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested transaction as @transaction" do
       transaction = Transaction.create! valid_attributes
-      get :edit, {:id => transaction.to_param, account_id: account.id}, valid_session
+      get :edit, params: {:id => transaction.to_param, account_id: account.id}, session: valid_session
       expect(assigns(:transaction)).to eq(transaction)
     end
   end
@@ -88,12 +88,12 @@ RSpec.describe TransactionsController, type: :controller do
     context "with valid params" do
       it "creates a new Transaction" do
         expect {
-          post :create, {:transaction => valid_attributes, account_id: account.id}, valid_session
+          post :create, params: {:transaction => valid_attributes, account_id: account.id}, session: valid_session
         }.to change(Transaction, :count).by(1)
       end
 
       it "assigns a newly created transaction as @transaction" do
-        post :create, {:transaction => valid_attributes, account_id: account.id}, valid_session
+        post :create, params: {:transaction => valid_attributes, account_id: account.id}, session: valid_session
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
 
@@ -113,19 +113,19 @@ RSpec.describe TransactionsController, type: :controller do
       end
 
       it "redirects to the created transaction" do
-        post :create, {:transaction => valid_attributes, account_id: account.id}, valid_session
+        post :create, params: {:transaction => valid_attributes, account_id: account.id}, session: valid_session
         expect(response).to redirect_to(account)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved transaction as @transaction" do
-        post :create, {:transaction => invalid_attributes, account_id: account.id}, valid_session
+        post :create, params: {:transaction => invalid_attributes, account_id: account.id}, session: valid_session
         expect(assigns(:transaction)).to be_a_new(Transaction)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:transaction => invalid_attributes, account_id: account.id}, valid_session
+        post :create, params: {:transaction => invalid_attributes, account_id: account.id}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -140,7 +140,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "updates the requested transaction" do
         transaction = Transaction.create! valid_attributes
         expect {
-          put :update, {:id => transaction.to_param, :transaction => new_attributes, account_id: account.id}, valid_session
+          put :update, params: {:id => transaction.to_param, :transaction => new_attributes, account_id: account.id}, session: valid_session
           #transaction.reload
           #skip("Add assertions for updated state")
         }.to raise_error(AbstractController::ActionNotFound)
@@ -149,7 +149,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "assigns the requested transaction as @transaction" do
         transaction = Transaction.create! valid_attributes
         expect {
-          put :update, {:id => transaction.to_param, :transaction => valid_attributes, account_id: account.id}, valid_session
+          put :update, params: {:id => transaction.to_param, :transaction => valid_attributes, account_id: account.id}, session: valid_session
           #expect(assigns(:transaction)).to eq(transaction)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -157,7 +157,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "redirects to the transaction" do
         transaction = Transaction.create! valid_attributes
         expect {
-          put :update, {:id => transaction.to_param, :transaction => valid_attributes, account_id: account.id}, valid_session
+          put :update, params: {:id => transaction.to_param, :transaction => valid_attributes, account_id: account.id}, session: valid_session
           #expect(response).to redirect_to(transaction)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -167,7 +167,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "assigns the transaction as @transaction" do
         transaction = Transaction.create! valid_attributes
         expect {
-          put :update, {:id => transaction.to_param, :transaction => invalid_attributes, account_id: account.id}, valid_session
+          put :update, params: {:id => transaction.to_param, :transaction => invalid_attributes, account_id: account.id}, session: valid_session
           #expect(assigns(:transaction)).to eq(transaction)
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -175,7 +175,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "re-renders the 'edit' template" do
         transaction = Transaction.create! valid_attributes
         expect {
-          put :update, {:id => transaction.to_param, :transaction => invalid_attributes, account_id: account.id}, valid_session
+          put :update, params: {:id => transaction.to_param, :transaction => invalid_attributes, account_id: account.id}, session: valid_session
           #expect(response).to render_template("edit")
         }.to raise_error(AbstractController::ActionNotFound)
       end
@@ -186,7 +186,7 @@ RSpec.describe TransactionsController, type: :controller do
     it "destroys the requested transaction" do
       transaction = Transaction.create! valid_attributes
       expect {
-        delete :destroy, {:id => transaction.to_param, account_id: account.id}, valid_session
+        delete :destroy, params: {:id => transaction.to_param, account_id: account.id}, session: valid_session
       #}.to change(Transaction, :count).by(-1)
       }.to raise_error(AbstractController::ActionNotFound)
     end
@@ -194,7 +194,7 @@ RSpec.describe TransactionsController, type: :controller do
     it "redirects to the transactions list" do
       transaction = Transaction.create! valid_attributes
       expect {
-        delete :destroy, {:id => transaction.to_param, account_id: account.id}, valid_session
+        delete :destroy, params: {:id => transaction.to_param, account_id: account.id}, session: valid_session
         #expect(response).to redirect_to(transactions_url)
       }.to raise_error(AbstractController::ActionNotFound)
     end

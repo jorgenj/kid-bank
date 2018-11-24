@@ -1,4 +1,4 @@
-class Posting < ActiveRecord::Base
+class Posting < ApplicationRecord
   resourcify
 
   belongs_to :account
@@ -22,7 +22,7 @@ class Posting < ActiveRecord::Base
   def capture_balances
     return unless account.present? && amount.present?
 
-    self.start_balance = account.postings(true).sum(:amount)
+    self.start_balance = account.postings.reload.sum(:amount)
     self.end_balance = self.start_balance + amount
   end
 

@@ -1,4 +1,4 @@
-class SystemAccount < ActiveRecord::Base
+class SystemAccount < ApplicationRecord
   resourcify
 
   belongs_to :account
@@ -25,6 +25,6 @@ class SystemAccount < ActiveRecord::Base
   private
 
   def self.first_admin_user
-    Role.where(name: 'admin').take.users.first
+    Role.admin.users.first
   end
 end
