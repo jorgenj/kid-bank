@@ -5,8 +5,8 @@ RSpec.describe SystemAccount, type: :model do
     it 'should be findable' do
       expect(Role.all).to_not be_empty
 
-      expect(SystemAccount.cash).to be_a(SystemAccount)
-      expect(SystemAccount.cash).to be_persisted
+      expect(SystemAccount.cash!).to be_a(SystemAccount)
+      expect(SystemAccount.cash!).to be_persisted
     end
   end
 
@@ -14,8 +14,8 @@ RSpec.describe SystemAccount, type: :model do
     it 'should be findable' do
       expect(Role.all).to_not be_empty
 
-      expect(SystemAccount.interest).to be_a(SystemAccount)
-      expect(SystemAccount.interest).to be_persisted
+      expect(SystemAccount.interest!).to be_a(SystemAccount)
+      expect(SystemAccount.interest!).to be_persisted
     end
   end
 end

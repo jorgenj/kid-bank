@@ -19,8 +19,8 @@ RSpec.describe Account, type: :model do
 
   describe 'Account.cash_account' do
     it 'should be findable' do
-      expect(Account.cash_account).to be_a(Account)
-      expect(Account.cash_account).to be_persisted
+      expect(Account.cash_account!).to be_a(Account)
+      expect(Account.cash_account!).to be_persisted
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe Account, type: :model do
       user_acct1 = create(:account)
       user_acct2 = create(:account)
 
-      expect(Account.cash_account).to be_persisted
+      expect(Account.cash_account!).to be_persisted
       expect(Account.all.count).to eq(2 + SystemAccount.count)
       expect(Account.user_accounts).to match_array([user_acct1,user_acct2])
     end

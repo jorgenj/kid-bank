@@ -38,7 +38,7 @@ class DividendManager
       return
     end
 
-    interest_src_account = Account.interest_account
+    interest_src_account = Account.interest_account!
 
     prev_sunday = date - 7.days
 

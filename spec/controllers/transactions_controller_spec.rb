@@ -22,7 +22,7 @@ RSpec.describe TransactionsController, type: :controller do
   login_user
 
   let!(:cash_account) {
-    Account.cash_account
+    Account.cash_account!
   }
 
   let(:account) {

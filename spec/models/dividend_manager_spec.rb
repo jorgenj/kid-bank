@@ -99,7 +99,7 @@ RSpec.describe DividendManager, type: :model do
       expect(posting.amount).to eq(7)
       expect(posting.journal.notes).to eq("Interest accrued - #{sunday.to_date}")
       other_posting = posting.journal.postings.to_a - [posting]
-      expect(other_posting.map(&:account)).to match_array([Account.interest_account])
+      expect(other_posting.map(&:account)).to match_array([Account.interest_account!])
     end
   end
 end

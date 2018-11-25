@@ -10,21 +10,15 @@ class SystemAccount < ApplicationRecord
   validates :account_id, 
     presence: true
 
-  def self.cash
-    find_or_create_by(name: 'CASH') do |new_sys_acct|
-      new_sys_acct.account = Account.create(user: first_admin_user, name: new_sys_acct.name)
+  def self.cash!
+    find_or_create_by!(name: 'CASH') do |new_cash_acct|
+      new_cash_acct.account = Account.create(user: User.first_admin, name: new_cash_acct.name)
     end
   end
 
-  def self.interest
-    find_or_create_by(name: 'INTEREST') do |new_sys_acct|
-      new_sys_acct.account = Account.create(user: first_admin_user, name: new_sys_acct.name)
+  def self.interest!
+    find_or_create_by!(name: 'INTEREST') do |new_int_acct|
+      new_int_acct.account = Account.create(user: User.first_admin, name: new_int_acct.name)
     end
-  end
-
-  private
-
-  def self.first_admin_user
-    Role.admin.users.first
   end
 end

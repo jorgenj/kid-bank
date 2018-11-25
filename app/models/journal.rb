@@ -15,7 +15,7 @@ class Journal < ApplicationRecord
     raise 'Amount must not be nil' if amount.nil?
     raise 'Amount must be greater than 0' unless amount > 0
 
-    transfer!(Account.cash_account, account, amount, 'DEPOSIT')
+    transfer!(Account.cash_account!, account, amount, 'DEPOSIT')
   end
 
   def self.withdraw!(account, amount)
@@ -23,7 +23,7 @@ class Journal < ApplicationRecord
     raise 'Amount must not be nil' if amount.nil?
     raise 'Amount must be greater than 0' unless amount > 0
 
-    transfer!(account, Account.cash_account, amount, 'WITHDRAWAL')
+    transfer!(account, Account.cash_account!, amount, 'WITHDRAWAL')
   end
 
   def self.transfer!(src_acct, dst_acct, amount, txn_type = 'TRANSFER', notes = nil)

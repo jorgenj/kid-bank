@@ -27,12 +27,12 @@ class Account < ApplicationRecord
     where(arel_table[:id].not_in(accts_with_earnings))
   }
 
-  def self.cash_account
-    SystemAccount.cash.account
+  def self.cash_account!
+    SystemAccount.cash!.account
   end
 
-  def self.interest_account
-    SystemAccount.interest.account
+  def self.interest_account!
+    SystemAccount.interest!.account
   end
 
   def update_balance
