@@ -127,6 +127,7 @@ RSpec.describe TransactionsController, type: :controller do
       it "re-renders the 'new' template" do
         post :create, params: {:transaction => invalid_attributes, account_id: account.id}, session: valid_session
         expect(response).to render_template("new")
+        expect(assigns(:transaction)).not_to be_valid
       end
     end
   end

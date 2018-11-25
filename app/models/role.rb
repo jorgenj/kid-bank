@@ -9,6 +9,6 @@ class Role < ApplicationRecord
   scopify
 
   def self.admin
-    Role.find_or_create_by(name: 'admin')
+    Role.find_or_create_by!(name: 'admin')
   end
 end
