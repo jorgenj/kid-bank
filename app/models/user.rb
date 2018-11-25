@@ -13,7 +13,7 @@ class User < ApplicationRecord
     user = User.first_or_create!({email: "#{SecureRandom.hex}@#{SecureRandom.hex}.com",
                            password: password,
                            password_confirmation: password }) do |if_created|
-      Role.admin.users << user
+      Role.admin.users << if_created
     end
 
     user
