@@ -1,25 +1,20 @@
 <h1>Listing Accounts</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Balance</th>
-      <th>APY</th>
-      <th colspan="3"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Balance</th>
+      <th scope="col">APY</th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= account.name %></td>
-        <td><%= account.balance %></td>
-        <td><%= account.annual_percentage_rate %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Deposit', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'DEPOSIT'}) %></td>
-        <td><%= link_to 'Withdraw', new_account_transaction_path(account, transaction: {account: account, transaction_type: 'WITHDRAWAL'}) %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
+        <th scope="row"><%= link_to account.name, account %></th>
+        <td><%= display_amount(account.balance) %></td>
+        <td><%= account.annual_percentage_rate %>% (<%= display_amount(account.interest_earned(7.days)) %> per week)</td>
       </tr>
     <% end %>
   </tbody>

@@ -1,37 +1,43 @@
 <h1>Account: <%= @account.name %></h1>
 <%= link_to 'Edit', edit_account_path(@account) %>
+<br/>
+<%= link_to '< All accounts', accounts_path %>
 
 <h2>Details</h2>
 <p>
     <b>Balance:</b> <%= display_amount(@account.balance) %><br><br>
-    <b>Annual percentage rage:</b> <%= @account.annual_percentage_rate %><br>
+    <b>Annual percentage rage:</b> <%= @account.annual_percentage_rate %>%<br>
     (Current balance would earn <%= display_amount(@account.interest_earned(7.days)) %> per week, <%= display_amount(@account.interest_earned(1.year)) %> per year)
 </p>
 
-<h2>Transactions</h2>
+<h2>
+  Transactions
+</h2>
+<p>
+  <small><%= link_to 'Deposit', new_account_transaction_path(@account, transaction: {transaction_type: 'DEPOSIT'}) %></small>
+  <small><%= link_to 'Withdraw', new_account_transaction_path(@account, transaction: {transaction_type: 'WITHDRAWAL'}) %></small>
+</p>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Transaction type</th>
-      <th>Note</th>
-      <th>Amount</th>
+      <th scope="col">Date</th>
+      <th scope="col">Transaction type</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Note</th>
     </tr>
   </thead>
 
   <tbody>
     <% @account.postings.includes(:journal).each do |posting| %>
       <tr>
+        <td><%= posting.journal.created_at %></td>
         <td><%= posting.journal.transaction_type %></td>
-        <td><%= posting.journal.notes %></td>
         <td><%= display_amount(posting.amount) %></td>
+        <td><%= posting.journal.notes %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
 
-<td><%= link_to 'Deposit', new_account_transaction_path(@account, transaction: {transaction_type: 'DEPOSIT'}) %></td>
-<td><%= link_to 'Withdraw', new_account_transaction_path(@account, transaction: {transaction_type: 'WITHDRAWAL'}) %></td>
-<%= link_to 'Back', accounts_path %>

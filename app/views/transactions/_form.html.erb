@@ -11,23 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :transaction_type %><br>
-    <%= f.select :transaction_type, %w(DEPOSIT WITHDRAWAL) %>
+    <%= f.select :transaction_type, %w(DEPOSIT WITHDRAWAL), {}, {class: 'form-control'} %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :account_id %><br>
-    <%= f.select :account_id, Account.user_accounts.map { |a| [a.name, a.id] } %>
+    <%= f.select :account_id, Account.user_accounts.map { |a| [a.name, a.id] }, {}, {class: 'form-control'} %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :amount, 'Amount (in cents)' %><br>
-    <%= f.number_field :amount %>
+    <%= f.number_field :amount, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :note %><br>
-    <%= f.text_field :note %>
+    <%= f.text_field :note, class: 'form-control' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create transaction', class: 'btn btn-primary'%>
   </div>
 <% end %>
