@@ -18,6 +18,8 @@
   <small><%= link_to 'Withdraw', new_account_transaction_path(@account, transaction: {transaction_type: 'WITHDRAWAL'}) %></small>
 </p>
 
+<% txns = @account.postings.order('created_at DESC').includes(:journal).page(params[:page]) %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -28,8 +30,18 @@
     </tr>
   </thead>
 
+  <% if txns.total_pages > 1 %>
+    <thead>
+      <tr>
+        <td>
+          <%= paginate txns %>
+        </td>
+      </tr>
+    </thead>
+  <% end %>
+
   <tbody>
-    <% @account.postings.includes(:journal).each do |posting| %>
+    <% txns.each do |posting| %>
       <tr>
         <td><%= posting.journal.created_at %></td>
         <td><%= posting.journal.transaction_type %></td>
