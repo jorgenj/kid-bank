@@ -33,9 +33,9 @@ class Transaction < ApplicationRecord
 
   def record_journal
     if deposit?
-      self.journal = Journal.deposit!(account, amount)
+      self.journal = Journal.deposit!(account, amount, note)
     elsif withdrawal?
-      self.journal = Journal.withdraw!(account, amount)
+      self.journal = Journal.withdraw!(account, amount, note)
     else
       raise "Unknown transaction type: #{transaction_type}"
     end

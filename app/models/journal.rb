@@ -2,6 +2,7 @@ class Journal < ApplicationRecord
   resourcify
 
   has_many :postings
+  has_one :txn, class_name: 'Transaction'
 
   validates :transaction_type, 
     presence: true,
@@ -10,20 +11,20 @@ class Journal < ApplicationRecord
   #TODO: validate sum total of all postings nets to zero
   #TODO: validate postings count > 0
   
-  def self.deposit!(account, amount)
+  def self.deposit!(account, amount, notes = nil)
     raise 'Account must not be nil' if account.nil?
     raise 'Amount must not be nil' if amount.nil?
     raise 'Amount must be greater than 0' unless amount > 0
 
-    transfer!(Account.cash_account!, account, amount, 'DEPOSIT')
+    transfer!(Account.cash_account!, account, amount, 'DEPOSIT', notes)
   end
 
-  def self.withdraw!(account, amount)
+  def self.withdraw!(account, amount, notes = nil)
     raise 'Account must not be nil' if account.nil?
     raise 'Amount must not be nil' if amount.nil?
     raise 'Amount must be greater than 0' unless amount > 0
 
-    transfer!(account, Account.cash_account!, amount, 'WITHDRAWAL')
+    transfer!(account, Account.cash_account!, amount, 'WITHDRAWAL', notes)
   end
 
   def self.transfer!(src_acct, dst_acct, amount, txn_type = 'TRANSFER', notes = nil)
