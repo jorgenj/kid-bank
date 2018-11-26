@@ -14,7 +14,7 @@
       <tr>
         <th scope="row"><%= link_to account.name, account %></th>
         <td><%= display_amount(account.balance) %></td>
-        <td><%= account.annual_percentage_rate %>% (<%= display_amount(account.interest_earned(7.days)) %> per week)</td>
+        <td><%= account.annual_percentage_rate || 0.0 %>% (<%= display_amount(account.interest_earned(7.days)) %> per week)</td>
       </tr>
     <% end %>
   </tbody>
