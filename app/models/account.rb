@@ -47,10 +47,14 @@ class Account < ApplicationRecord
   end
 
   def dpy
+    return nil if annual_percentage_rate.blank?
+
     BigDecimal.new(self.annual_percentage_rate) / (100 * 365)
   end
 
   def interest_earned(period, principal=self.balance)
+    return 0.0 if annual_percentage_rate.blank?
+
     num_days = (period / 1.day).to_i
     rate = (1 + dpy)**num_days
     end_balance = (principal * rate)

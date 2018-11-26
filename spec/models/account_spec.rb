@@ -54,5 +54,19 @@ RSpec.describe Account, type: :model do
 
       expect(acct.interest_earned(2.years)).to eq(86745)
     end
+
+    it 'should return zero if apr is nil' do
+      # A sum of Rs 5000 is borrowed and the rate is 8%. What is the daily compound interest for 2 years?
+      acct = create(:account, annual_percentage_rate: nil)
+      Journal.deposit!(acct, 5_000_00)
+      acct.reload
+
+      expect(acct.balance).to eq(5_000_00)
+      expect(acct.annual_percentage_rate).to be_nil
+      expect(acct.daily_percentage_rate).to be_nil
+      expect(acct.dpy).to be_nil
+
+      expect(acct.interest_earned(7.days)).to eq(0.0)
+    end
   end
 end
