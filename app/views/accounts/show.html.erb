@@ -6,7 +6,7 @@
 <h2>Details</h2>
 <p>
     <b>Balance:</b> <%= display_amount(@account.balance) %><br><br>
-    <b>Annual percentage rage:</b> <%= @account.annual_percentage_rate || 0.0 %>%<br>
+    <b>Annual percentage rate:</b> <%= @account.annual_percentage_rate || 0.0 %>%<br>
     (Current balance would earn <%= display_amount(@account.interest_earned(7.days)) %> per week, <%= display_amount(@account.interest_earned(1.year)) %> per year)
 </p>
 
