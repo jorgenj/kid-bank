@@ -20,3 +20,4 @@ spec/examples.txt
 
 ## rbenv local version
 .ruby-version
+.idea/

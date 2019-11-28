@@ -4,11 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0'
 
-group :development do
-    # Use sqlite3 as the database for Active Record
-    gem 'sqlite3'
-end
-
 group :production do
     gem 'pg'
 end
@@ -48,6 +43,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3', '~> 1.3.6'
 end
 
 group :test do
@@ -74,4 +72,4 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
-ruby "2.5.3"
+ruby "2.5.5"
